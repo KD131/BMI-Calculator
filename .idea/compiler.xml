@@ -15,7 +15,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="bmi" options="-endorseddirs $PROJECT_DIR$/target/endorsed" />
+      <module name="bmi" options="-endorseddirs &quot;E:\Documents\Google Drive\DAT\IdeaProjects\Flow 2 - BMI Calculator, Web\target/endorsed&quot;" />
     </option>
   </component>
 </project>
