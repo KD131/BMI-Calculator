@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: kavvt
   Date: 14-04-2021
-  Time: 09:55
+  Time: 23:45
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,7 +10,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <t:genericpage>
     <jsp:attribute name="header">
-        List of BMI entries
+        Your BMI history
     </jsp:attribute>
 
     <jsp:attribute name="footer">
@@ -18,7 +18,7 @@
     </jsp:attribute>
 
     <jsp:body>
-        <h1>List of all BMI entries in the database</h1>
+        <h1>Your BMI entries in the database</h1>
         <table class="table table-striped">
             <thead>
             <tr>

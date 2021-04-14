@@ -1,5 +1,7 @@
 package business.services;
 
+import business.entities.BmiEntry;
+import business.entities.User;
 import business.exceptions.UserException;
 import business.persistence.BmiMapper;
 import business.persistence.Database;
@@ -16,14 +18,18 @@ public class BmiFacade
     }
     
     public void insertBmiEntry(
-            double weight,
-            double height,
-            double bmi,
-            String category,
-            String gender,
-            int sportId,
-            List<Integer> hobbyList) throws UserException
+            BmiEntry bmiEntry) throws UserException
     {
-        bmiMapper.insertBmiEntry(weight, height, bmi, category, gender, sportId, hobbyList);
+        bmiMapper.insertBmiEntry(bmiEntry);
+    }
+    
+    public List<BmiEntry> getAllBmiEntries() throws UserException
+    {
+        return bmiMapper.getAllBmiEntries();
+    }
+    
+    public List<BmiEntry> getBmiEntriesByUser(User user) throws UserException
+    {
+        return bmiMapper.getBmiEntriesByUser(user);
     }
 }

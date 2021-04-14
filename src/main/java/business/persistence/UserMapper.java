@@ -13,6 +13,42 @@ public class UserMapper
     {
         this.database = database;
     }
+    
+    public User getUserById(int id) throws UserException
+    {
+        try (Connection con = database.connect())
+        {
+            String sql = "SELECT email, password, role FROM bmi.users WHERE id=?";
+            
+            try (PreparedStatement ps = con.prepareStatement(sql))
+            {
+                ps.setInt(1, id);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next())
+                {
+                    String email = rs.getString("email");
+                    String password = rs.getString("password");
+                    String role = rs.getString("role");
+                    
+                    User user = new User(email, password, role);
+                    user.setId(id);
+                    return user;
+                }
+                else
+                {
+                    throw new UserException("Could not find user.");
+                }
+            }
+            catch (SQLException ex)
+            {
+                throw new UserException(ex.getMessage());
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new UserException(ex.getMessage());
+        }
+    }
 
     public void createUser(User user) throws UserException
     {

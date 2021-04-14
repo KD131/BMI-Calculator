@@ -1,5 +1,8 @@
 package web.commands;
 
+import business.entities.BmiEntry;
+import business.entities.Sport;
+import business.entities.User;
 import business.exceptions.UserException;
 import business.services.BmiFacade;
 import business.services.BmiUtil;
@@ -48,6 +51,9 @@ public class CalcBMICommand extends CommandUnprotectedPage
         
         try
         {
+            // TODO: save as double but parse as int so you can do arithmetic but prevent users from inputting decimals
+            // TODO: put the meter conversion in the calculation formula instead to preserve height as whole number in cm
+            // TODO: set "step" in the HTML to 1 to prevent decimals. ACTUALLY, default is 1, so it works right now.
             weight = Double.parseDouble(request.getParameter("weight"));
             height = Double.parseDouble(request.getParameter("height")) / 100; // convert to meter
         }
@@ -62,6 +68,7 @@ public class CalcBMICommand extends CommandUnprotectedPage
         bmi = BmiUtil.calcBMI(weight,height);
         category = BmiUtil.getCategory(bmi);
     
+        // TODO: you can consolidate this to just saving the bmiEntry instead of every variable separately.
         request.setAttribute("weight",weight);
         request.setAttribute("height",height);
         request.setAttribute("bmi",String.format(Locale.ENGLISH,"%.2f",bmi));  // rounds to 2 decimals.
@@ -70,7 +77,17 @@ public class CalcBMICommand extends CommandUnprotectedPage
         request.setAttribute("sportId",sportId);
         request.setAttribute("hobbies",hobbyList);
         
-        bmiFacade.insertBmiEntry(weight, height, bmi, category, gender, sportId, hobbyList);
+        // get User from session scope and cast it to User.
+        // if not logged in, should return null.
+        User user = (User)request.getSession().getAttribute("user");
+    
+        BmiEntry bmiEntry = new BmiEntry(weight, height, bmi, category, gender, hobbyList, user);
+        // TODO: make a nicer way to instantiate Sports, or add them to the database.
+        //  or at least think about it.
+        //  I guess you can do it in the Mapper so you query the name as well.
+        bmiEntry.setSport(new Sport(sportId));
+        
+        bmiFacade.insertBmiEntry(bmiEntry);
         
         return pageToShow;
     }

@@ -30,6 +30,7 @@ public abstract class Command
         commands.put("employeepage", new CommandProtectedPage("employeepage", "employee"));
         commands.put("bmiresult", new CalcBMICommand("resultpage"));
         commands.put("bmientries", new BmiEntriesCommand("bmientriespage","employee"));
+        commands.put("userbmientries", new UserBmiEntriesCommand("userbmientriespage"));
     }
 
     public static Command fromPath(
