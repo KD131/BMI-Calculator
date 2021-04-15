@@ -173,7 +173,7 @@ public class BmiMapper
             //  You can't return an array, so there would be duplicate result-rows with only a hobby as difference.
             
             // TODO: narrow it down.
-            String sql = "SELECT * FROM bmi.bmientries WHERE id = ?";
+            String sql = "SELECT * FROM bmi.bmientries WHERE user_id = ?";
             
             List<BmiEntry> bmiEntryList = new ArrayList<>();
             try (PreparedStatement ps = con.prepareStatement(sql))
