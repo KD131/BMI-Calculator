@@ -27,6 +27,8 @@
                         <tr>
                             <th>SportID</th>
                             <th>Name</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -39,6 +41,11 @@
                                         Delete
                                     </button>
                                 </td>
+                                <td>
+                                    <button type="submit" class="btn btn-warning" name="edit" value="${sport.id}">
+                                        Edit
+                                    </button>
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -47,6 +54,9 @@
                 <c:if test="${requestScope.error != null}">
                     <p style="color: red">${requestScope.error}</p>
                 </c:if>
+                <form action="${pageContext.request.contextPath}/fc/managesports" method="post">
+                    <button type="submit" class="btn btn-success" name="add">Add new sport</button>
+                </form>
             </div>
         </div>
     </jsp:body>

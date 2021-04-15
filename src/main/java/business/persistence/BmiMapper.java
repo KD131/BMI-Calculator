@@ -136,6 +136,9 @@ public class BmiMapper
                     BmiEntry entry = new BmiEntry(weight, height, bmi, category, gender,null,null, null);
                     entry.setEntryId(id);
                     entry.setCreated(created);
+    
+                    Sport sport = getSportById(sportId);
+                    entry.setSport(sport);
                     
                     // entry had no user logged in, i.e. user_id field in database was null.
                     
