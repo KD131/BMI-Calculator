@@ -25,7 +25,7 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>SportID</th>
+                            <th>ID</th>
                             <th>Name</th>
                             <th></th>
                             <th></th>
@@ -37,13 +37,13 @@
                                 <td>${sport.id}</td>
                                 <td>${sport.name}</td>
                                 <td>
-                                    <button type="submit" class="btn btn-danger" name="delete" value="${sport.id}">
-                                        Delete
+                                    <button type="submit" class="btn btn-warning" name="edit" value="${sport.id}">
+                                        Edit
                                     </button>
                                 </td>
                                 <td>
-                                    <button type="submit" class="btn btn-warning" name="edit" value="${sport.id}">
-                                        Edit
+                                    <button type="submit" class="btn btn-danger" name="delete" value="${sport.id}">
+                                        Delete
                                     </button>
                                 </td>
                             </tr>
@@ -57,6 +57,7 @@
                 <form action="${pageContext.request.contextPath}/fc/managesports" method="post">
                     <button type="submit" class="btn btn-success" name="add">Add new sport</button>
                 </form>
+                <!-- TODO: Make Command and page for creating new sport. You can maybe reuse the edit page. -->
             </div>
         </div>
     </jsp:body>

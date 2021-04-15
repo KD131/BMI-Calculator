@@ -10,6 +10,12 @@ public class Sport
         this.name = name;
     }
     
+    public Sport(int id, String name)
+    {
+        this.id = id;
+        this.name = name;
+    }
+    
     public int getId()
     {
         return id;

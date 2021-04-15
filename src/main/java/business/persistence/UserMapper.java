@@ -18,7 +18,7 @@ public class UserMapper
     {
         try (Connection con = database.connect())
         {
-            String sql = "SELECT email, password, role FROM bmi.users WHERE id=?";
+            String sql = "SELECT email, password, role FROM bmi.users WHERE id = ?";
             
             try (PreparedStatement ps = con.prepareStatement(sql))
             {
@@ -36,7 +36,7 @@ public class UserMapper
                 }
                 else
                 {
-                    throw new UserException("Could not find user.");
+                    throw new UserException("Could not find user. ID = " + id);
                 }
             }
             catch (SQLException ex)

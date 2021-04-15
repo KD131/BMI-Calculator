@@ -237,8 +237,7 @@ public class BmiMapper
                     int id = rs.getInt("id");
                     String name = rs.getString("name");
                     
-                    Sport sport = new Sport(name);
-                    sport.setId(id);
+                    Sport sport = new Sport(id, name);
                     sportList.add(sport);
                 }
                 return sportList;
@@ -269,13 +268,12 @@ public class BmiMapper
                 {
                     String name = rs.getString("name");
                     
-                    Sport sport = new Sport(name);
-                    sport.setId(id);
+                    Sport sport = new Sport(id, name);
                     return sport;
                 }
                 else
                 {
-                    throw new UserException("Could not find sport.");
+                    throw new UserException("Could not find sport. ID = " + id);
                 }
             }
             catch (SQLException ex)
@@ -303,6 +301,58 @@ public class BmiMapper
                 int affectedRows = ps.executeUpdate();
                 return affectedRows;
                 
+            }
+            catch (SQLException ex)
+            {
+                throw new UserException(ex.getMessage());
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new UserException(ex.getMessage());
+        }
+    }
+    
+    public int updateSport(Sport sport) throws UserException
+    {
+        try (Connection con = database.connect())
+        {
+            String sql = "UPDATE bmi.sports SET `name` = ? WHERE id = ?";
+            
+            try (PreparedStatement ps = con.prepareStatement(sql))
+            {
+                ps.setString(1, sport.getName());
+                ps.setInt(2, sport.getId());
+                int affectedRows = ps.executeUpdate();
+                return affectedRows;
+                
+            }
+            catch (SQLException ex)
+            {
+                throw new UserException(ex.getMessage());
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new UserException(ex.getMessage());
+        }
+    }
+    
+    public int insertSport(Sport sport) throws UserException
+    {
+        try (Connection con = database.connect())
+        {
+            String sql = "INSERT INTO bmi.sports (name) VALUES (?)";
+            
+            try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS))
+            {
+                ps.setString(1, sport.getName());
+                int affectedRows = ps.executeUpdate();
+                ResultSet ids = ps.getGeneratedKeys();
+                ids.next();
+                int id = ids.getInt(1);
+                sport.setId(id);
+                return affectedRows;
             }
             catch (SQLException ex)
             {
