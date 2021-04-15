@@ -18,22 +18,26 @@
     </jsp:attribute>
 
     <jsp:body>
-        <h1>Manage the sports list</h1>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>SportID</th>
-                <th>Name</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="sport" items="${applicationScope.sportList}">
-                <tr>
-                    <td>${sport.id}</td>
-                    <td>${sport.name}</td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
+        <div class="row">
+            <div class="col-sm-4 mx-auto">
+                <h1>Manage the sports list</h1>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>SportID</th>
+                        <th>Name</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="sport" items="${applicationScope.sportList}">
+                        <tr>
+                            <td>${sport.id}</td>
+                            <td>${sport.name}</td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </jsp:body>
 </t:genericpage>
