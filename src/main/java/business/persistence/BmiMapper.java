@@ -42,6 +42,7 @@ public class BmiMapper
                     insertEntryHobbies(entryId, hobbyId);
                 }
                 
+                // user logged in, i.e. entry has user
                 if (bmiEntry.getUser() != null)
                 {
                     insertUserId(entryId, bmiEntry.getUser().getId());
@@ -135,6 +136,8 @@ public class BmiMapper
                     entry.setEntryId(id);
                     entry.setCreated(created);
                     
+                    // entry had no user logged in, i.e. user_id field in database was null.
+                    
                     // could also do it for everyone, and if it throws an exception for user not found because id == 0
                     // then set it to null, or just move on because it's already null anyway.
                     if (userId != 0)
@@ -160,6 +163,7 @@ public class BmiMapper
         }
     }
     
+    // could also take int and be ByUserId()
     public List<BmiEntry> getBmiEntriesByUser(User user) throws UserException
     {
         try (Connection con = database.connect())
