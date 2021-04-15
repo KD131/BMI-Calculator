@@ -44,6 +44,9 @@
                         </tbody>
                     </table>
                 </form>
+                <c:if test="${requestScope.error != null}">
+                    <p style="color: red">${requestScope.error}</p>
+                </c:if>
             </div>
         </div>
     </jsp:body>

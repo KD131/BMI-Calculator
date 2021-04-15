@@ -1,8 +1,8 @@
 package web;
 
 import business.exceptions.UserException;
-import business.persistence.BmiMapper;
 import business.persistence.Database;
+import business.services.BmiFacade;
 import web.commands.*;
 
 import java.io.IOException;
@@ -39,10 +39,10 @@ public class FrontController extends HttpServlet
             }
         }
     
-        BmiMapper bmiMapper = new BmiMapper(database);
+        BmiFacade bmiFacade = new BmiFacade(database);
         try
         {
-            getServletContext().setAttribute("sportList", bmiMapper.getAllSports());
+            getServletContext().setAttribute("sportList", bmiFacade.getAllSports());
         }
         catch (UserException e)
         {

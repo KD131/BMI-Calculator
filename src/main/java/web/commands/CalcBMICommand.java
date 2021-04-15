@@ -67,24 +67,31 @@ public class CalcBMICommand extends CommandUnprotectedPage
         bmi = BmiUtil.calcBMI(weight,height);
         category = BmiUtil.getCategory(bmi);
     
+        
+        // get User from session scope and cast it to User.
+        // if not logged in, should return null.
+        User user = (User)request.getSession().getAttribute("user");
+        
+        // you can do same for hobbies once that's also put in a List and imported from database
+        Sport sport = null;
+        for (Sport s : (List<Sport>)request.getServletContext().getAttribute("sportList"))
+        {
+            if (s.getId() == sportId)
+            {
+                sport = s;
+            }
+        }
+        
         // TODO: you can consolidate this to just saving the bmiEntry instead of every variable separately.
         request.setAttribute("weight",weight);
         request.setAttribute("height",height);
         request.setAttribute("bmi",String.format(Locale.ENGLISH,"%.2f",bmi));  // rounds to 2 decimals.
         request.setAttribute("category",category);
         request.setAttribute("gender",gender);
-        request.setAttribute("sportId",sportId);
+        request.setAttribute("sport",sport);
         request.setAttribute("hobbies",hobbyList);
-        
-        // get User from session scope and cast it to User.
-        // if not logged in, should return null.
-        User user = (User)request.getSession().getAttribute("user");
     
-        BmiEntry bmiEntry = new BmiEntry(weight, height, bmi, category, gender, hobbyList, user);
-        // TODO: make a nicer way to instantiate Sports, or add them to the database.
-        //  or at least think about it.
-        //  I guess you can do it in the Mapper so you query the name as well.
-        bmiEntry.setSport(new Sport(sportId));
+        BmiEntry bmiEntry = new BmiEntry(weight, height, bmi, category, gender, sport, hobbyList, user);
         
         bmiFacade.insertBmiEntry(bmiEntry);
         

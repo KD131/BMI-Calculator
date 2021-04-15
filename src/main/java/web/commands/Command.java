@@ -31,7 +31,7 @@ public abstract class Command
         commands.put("bmiresult", new CalcBMICommand("resultpage"));
         commands.put("bmientries", new BmiEntriesCommand("bmientriespage","employee"));
         commands.put("userbmientries", new UserBmiEntriesCommand("userbmientriespage"));
-        commands.put("managesports", new CommandProtectedPage("managesportspage", "employee"));
+        commands.put("managesports", new ManageSportsCommand("managesportspage", "employee"));
     }
 
     public static Command fromPath(

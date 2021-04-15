@@ -19,13 +19,14 @@ public class BmiEntry
     // TODO: decide if hobbyList and user should be in the constructor. There's a good case to be made that they shouldn't.
     //  But they could always be null when instantiated.
     //  But you could just as easily, perhaps more cleanly, just set it after the instantiation.
-    public BmiEntry(double weight, double height, double bmi, String category, String gender, List<Integer> hobbyList, User user)
+    public BmiEntry(double weight, double height, double bmi, String category, String gender, Sport sport, List<Integer> hobbyList, User user)
     {
         this.weight = weight;
         this.height = height;
         this.bmi = bmi;
         this.category = category;
         this.gender = gender;
+        this.sport = sport;
         this.hobbyList = hobbyList;
         this.user = user;
     }

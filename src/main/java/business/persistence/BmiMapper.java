@@ -133,7 +133,7 @@ public class BmiMapper
                     
                     // it's debatable whether user should be in the constructor or always set later
                     // you could also wait with instantiating the entry until after you've fetched the user.
-                    BmiEntry entry = new BmiEntry(weight, height, bmi, category, gender,null,null);
+                    BmiEntry entry = new BmiEntry(weight, height, bmi, category, gender,null,null, null);
                     entry.setEntryId(id);
                     entry.setCreated(created);
                     
@@ -193,7 +193,11 @@ public class BmiMapper
                     int sportId = rs.getInt("sport_id");
                     Timestamp created = rs.getTimestamp("created");
                     
-                    BmiEntry entry = new BmiEntry(weight, height, bmi, category, gender,null,null);
+                    Sport sport = getSportById(sportId);
+                    
+                    // TODO get List of Hobbies
+                    
+                    BmiEntry entry = new BmiEntry(weight, height, bmi, category, gender,sport,null, user);
                     entry.setEntryId(id);
                     entry.setCreated(created);
     
@@ -213,11 +217,13 @@ public class BmiMapper
         }
     }
     
+    // TODO: It would be ever so slightly more efficient as a SortedTreeMap. Makes it easier to get Sport by id.
     public List<Sport> getAllSports() throws UserException
     {
         try (Connection con = database.connect())
         {
             String sql = "SELECT * FROM bmi.sports";
+            
             try (PreparedStatement ps = con.prepareStatement(sql))
             {
                 ResultSet rs = ps.executeQuery();
@@ -227,9 +233,9 @@ public class BmiMapper
                 {
                     int id = rs.getInt("id");
                     String name = rs.getString("name");
-                    // TODO if refactoring Sport constructor, change here
-                    Sport sport = new Sport(id);
-                    sport.setName(name);
+                    
+                    Sport sport = new Sport(name);
+                    sport.setId(id);
                     sportList.add(sport);
                 }
                 return sportList;
@@ -245,4 +251,64 @@ public class BmiMapper
         }
     }
     
+    public Sport getSportById(int id) throws UserException
+    {
+        try (Connection con = database.connect())
+        {
+            String sql = "SELECT `name` FROM bmi.sports WHERE id = ?";
+            
+            try (PreparedStatement ps = con.prepareStatement(sql))
+            {
+                ps.setInt(1, id);
+                ResultSet rs = ps.executeQuery();
+                
+                if (rs.next())
+                {
+                    String name = rs.getString("name");
+                    
+                    Sport sport = new Sport(name);
+                    sport.setId(id);
+                    return sport;
+                }
+                else
+                {
+                    throw new UserException("Could not find sport.");
+                }
+            }
+            catch (SQLException ex)
+            {
+                throw new UserException(ex.getMessage());
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new UserException(ex.getMessage());
+        }
+    }
+    
+    public int deleteSportById(int id) throws UserException
+    {
+        try (Connection con = database.connect())
+        {
+            String sql = "DELETE FROM bmi.sports " +
+                    "WHERE id = ? AND id NOT IN (" +
+                    "SELECT sport_id FROM bmi.bmientries)";
+            
+            try (PreparedStatement ps = con.prepareStatement(sql))
+            {
+                ps.setInt(1, id);
+                int affectedRows = ps.executeUpdate();
+                return affectedRows;
+                
+            }
+            catch (SQLException ex)
+            {
+                throw new UserException(ex.getMessage());
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new UserException(ex.getMessage());
+        }
+    }
 }

@@ -44,7 +44,7 @@
                     </tr>
                     <tr>
                         <td>Primary sport (id)</td>
-                        <td>${requestScope.sportId}</td>
+                        <td>${requestScope.sport.name}</td>
                     </tr>
                     <c:if test="${not empty requestScope.hobbies}">
                         <tr>

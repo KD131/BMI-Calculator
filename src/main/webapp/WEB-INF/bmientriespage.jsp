@@ -42,7 +42,7 @@
                     <td>${bmiEntry.bmi}</td>
                     <td>${bmiEntry.category}</td>
                     <td>${bmiEntry.gender}</td>
-                    <td>${bmiEntry.sport}</td>
+                    <td>${bmiEntry.sport.name}</td>
                     <td>${bmiEntry.user.email}</td>
                     <td>${bmiEntry.created}</td>
                 </tr>
