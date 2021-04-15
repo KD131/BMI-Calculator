@@ -39,10 +39,9 @@ public class CalcBMICommand extends CommandUnprotectedPage
         int sportId = Integer.parseInt(request.getParameter("primary-sport"));
         // TODO: error handle the parseInt();
         String[] hobbies = request.getParameterValues("hobby");
-        List<Integer> hobbyList = null;
+        List<Integer> hobbyList = new ArrayList<>();
         if (hobbies != null)
         {
-            hobbyList = new ArrayList<>();
             for (String hobby : hobbies)
             {
                 hobbyList.add(Integer.parseInt(hobby));
