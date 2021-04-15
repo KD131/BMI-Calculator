@@ -19,14 +19,13 @@
 
                 <form action="${pageContext.request.contextPath}/fc/bmiresult" method="post">
                     <div class="form-group form-floating mb-3">
-                        <input type="number" class="form-control" name="weight" id="weight" placeholder="Weight" required>
+                        <input type="number" class="form-control" name="weight" id="weight" placeholder="Weight" step="1" required>
                         <label for="weight" class="form-label">
                             Weight (kg)
                         </label>
                     </div>
                     <div class="form-group form-floating mb-3">
-                        <input type="number" class="form-control" name="height" id="height" placeholder="Height"
-                               required>
+                        <input type="number" class="form-control" name="height" id="height" placeholder="Height" step="1" required>
                         <label for="height" class="form-label">
                             Height (cm)
                         </label>
