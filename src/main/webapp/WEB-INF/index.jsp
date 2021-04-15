@@ -51,10 +51,9 @@
                             Your primary sport is
                         </label> <br/>
                         <select id="primary-sport" class="form-select" name="primary-sport" required>
-                            <option value="1">Running</option>
-                            <option value="2">Football</option>
-                            <option value="3">Handball</option>
-                            <option value="4">Yoga</option>
+                            <c:forEach var="sport" items="${applicationScope.sportList}">
+                                <option value="${sport.id}">${sport.name}</option>
+                            </c:forEach>
                         </select>
                     </div>
                     <div class="form-check">

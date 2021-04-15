@@ -1,6 +1,7 @@
 package business.persistence;
 
 import business.entities.BmiEntry;
+import business.entities.Sport;
 import business.entities.User;
 import business.exceptions.UserException;
 
@@ -211,4 +212,37 @@ public class BmiMapper
             throw new UserException(ex.getMessage());
         }
     }
+    
+    public List<Sport> getAllSports() throws UserException
+    {
+        try (Connection con = database.connect())
+        {
+            String sql = "SELECT * FROM bmi.sports";
+            try (PreparedStatement ps = con.prepareStatement(sql))
+            {
+                ResultSet rs = ps.executeQuery();
+                List<Sport> sportList = new ArrayList<>();
+                
+                while (rs.next())
+                {
+                    int id = rs.getInt("id");
+                    String name = rs.getString("name");
+                    // TODO if refactoring Sport constructor, change here
+                    Sport sport = new Sport(id);
+                    sport.setName(name);
+                    sportList.add(sport);
+                }
+                return sportList;
+            }
+            catch (SQLException ex)
+            {
+                throw new UserException(ex.getMessage());
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new UserException(ex.getMessage());
+        }
+    }
+    
 }

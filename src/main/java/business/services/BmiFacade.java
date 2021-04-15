@@ -1,6 +1,7 @@
 package business.services;
 
 import business.entities.BmiEntry;
+import business.entities.Sport;
 import business.entities.User;
 import business.exceptions.UserException;
 import business.persistence.BmiMapper;
@@ -31,5 +32,10 @@ public class BmiFacade
     public List<BmiEntry> getBmiEntriesByUser(User user) throws UserException
     {
         return bmiMapper.getBmiEntriesByUser(user);
+    }
+    
+    public List<Sport> getAllSports() throws UserException
+    {
+        return bmiMapper.getAllSports();
     }
 }
