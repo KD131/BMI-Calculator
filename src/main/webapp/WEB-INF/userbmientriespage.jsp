@@ -49,5 +49,6 @@
             </c:forEach>
             </tbody>
         </table>
+        <p>Click <a href="${pageContext.request.contextPath}">here</a> to make some new BMI calculations.</p>
     </jsp:body>
 </t:genericpage>
