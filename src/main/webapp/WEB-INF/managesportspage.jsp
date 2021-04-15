@@ -21,22 +21,29 @@
         <div class="row">
             <div class="col-sm-4 mx-auto">
                 <h1>Manage the sports list</h1>
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>SportID</th>
-                        <th>Name</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="sport" items="${applicationScope.sportList}">
+                <form action="${pageContext.request.contextPath}/fc/managesports" method="post">
+                    <table class="table table-striped">
+                        <thead>
                         <tr>
-                            <td>${sport.id}</td>
-                            <td>${sport.name}</td>
+                            <th>SportID</th>
+                            <th>Name</th>
                         </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="sport" items="${applicationScope.sportList}">
+                            <tr>
+                                <td>${sport.id}</td>
+                                <td>${sport.name}</td>
+                                <td>
+                                    <button type="submit" class="btn btn-danger" name="delete" value="${sport.id}">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </form>
             </div>
         </div>
     </jsp:body>
