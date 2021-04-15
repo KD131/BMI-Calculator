@@ -13,6 +13,7 @@
         <p>You are now logged in as a EMPLOYEE of our wonderful site.</p>
 
         <p><a href="${pageContext.request.contextPath}/fc/bmientries">Show all BMI entries</a></p>
+        <p>Click <a href="${pageContext.request.contextPath}/fc/userbmientries">here</a> to see your BMI history.</p>
 
     </jsp:body>
 </t:genericpage>
