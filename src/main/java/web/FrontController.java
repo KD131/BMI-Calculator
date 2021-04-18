@@ -2,7 +2,7 @@ package web;
 
 import business.exceptions.UserException;
 import business.persistence.Database;
-import business.services.BmiFacade;
+import business.services.SportFacade;
 import web.commands.*;
 
 import java.io.IOException;
@@ -39,10 +39,10 @@ public class FrontController extends HttpServlet
             }
         }
     
-        BmiFacade bmiFacade = new BmiFacade(database);
+        SportFacade sportFacade = new SportFacade(database);
         try
         {
-            getServletContext().setAttribute("sportList", bmiFacade.getAllSports());
+            getServletContext().setAttribute("sportList", sportFacade.getAllSports());
         }
         catch (UserException e)
         {
