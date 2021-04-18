@@ -20,7 +20,7 @@
     <jsp:body>
         <div class="row">
             <div class="col-sm-4 mx-auto">
-                <h2>Result page, yun!</h2>
+                <h1>Result page, yun!</h1>
                 <table class="table table-striped">
                     <tr>
                         <td>Weight</td>

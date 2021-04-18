@@ -15,17 +15,21 @@
     <jsp:body>
         <div class="row">
             <div class="col-sm-4 mx-auto">
-                <h2>BMI calculator</h2>
+                <div class="text-center">
+                    <h1>BMI calculator</h1>
+                </div>
 
                 <form action="${pageContext.request.contextPath}/fc/bmiresult" method="post">
                     <div class="form-group form-floating mb-3">
-                        <input type="number" class="form-control" name="weight" id="weight" placeholder="Weight" step="1" required>
+                        <input type="number" class="form-control" name="weight" id="weight" placeholder="Weight"
+                               step="1" required>
                         <label for="weight" class="form-label">
                             Weight (kg)
                         </label>
                     </div>
                     <div class="form-group form-floating mb-3">
-                        <input type="number" class="form-control" name="height" id="height" placeholder="Height" step="1" required>
+                        <input type="number" class="form-control" name="height" id="height" placeholder="Height"
+                               step="1" required>
                         <label for="height" class="form-label">
                             Height (cm)
                         </label>
@@ -39,7 +43,8 @@
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" id="female" name="gender" value="female" required>
+                            <input type="radio" class="form-check-input" id="female" name="gender" value="female"
+                                   required>
                             <label for="female" class="form-check-label">
                                 Female
                             </label>
@@ -74,25 +79,27 @@
                         </label>
                     </div>
 
-            <c:if test="${requestScope.error != null}">
-                <p style="color: red">${requestScope.error}</p>
-            </c:if>
+                    <c:if test="${requestScope.error != null}">
+                        <p style="color: red">${requestScope.error}</p>
+                    </c:if>
 
-            <input type="submit" class="btn btn-success mt-2" value="Calculate">
-            </form>
-        </div>
-        <c:if test="${sessionScope.role == 'employee' }">
+                    <div class="text-center">
+                        <input type="submit" class="btn btn-success mt-2" value="Calculate">
+                    </div>
+                </form>
+            </div>
+            <c:if test="${sessionScope.role == 'employee' }">
             <p style="font-size: larger">This is what you can do,
                 since your are logged in as an employee</p>
             <p><a href="fc/employeepage">Employee Page</a>
-        </c:if>
+                </c:if>
 
-        <c:if test="${sessionScope.role == 'customer' }">
+                <c:if test="${sessionScope.role == 'customer' }">
             <p style="font-size: larger">This is what you can do, since your
                 are logged in as a customer</p>
             <p><a href="fc/customerpage">Customer Page</a>
-        </c:if>
-<%--        <p><a href="fc/bmiresult">To result page</a></p>--%>
+                </c:if>
+                    <%--        <p><a href="fc/bmiresult">To result page</a></p>--%>
 
         </div>
 
