@@ -32,13 +32,13 @@
                     </div>
                     <hr>
                     <div class="form-group mb-3">
-                        <div class="form-check">
+                        <div class="form-check form-check-inline">
                             <input type="radio" class="form-check-input" id="male" name="gender" value="male" required>
                             <label for="male" class="form-check-label">
                                 Male
                             </label>
                         </div>
-                        <div class="form-check">
+                        <div class="form-check form-check-inline">
                             <input type="radio" class="form-check-input" id="female" name="gender" value="female" required>
                             <label for="female" class="form-check-label">
                                 Female
