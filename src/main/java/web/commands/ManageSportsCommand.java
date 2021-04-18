@@ -2,19 +2,19 @@ package web.commands;
 
 import business.entities.Sport;
 import business.exceptions.UserException;
-import business.services.BmiFacade;
+import business.services.SportFacade;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 public class ManageSportsCommand extends CommandProtectedPage
 {
-    BmiFacade bmiFacade;
+    SportFacade sportFacade;
+    
     public ManageSportsCommand(String pageToShow, String role)
     {
         super(pageToShow, role);
-        this.bmiFacade = new BmiFacade(database);
+        this.sportFacade = new SportFacade(database);
     }
     
     @Override
@@ -28,13 +28,13 @@ public class ManageSportsCommand extends CommandProtectedPage
         
         if (deleteId != null)
         {
-            int affectedRows = bmiFacade.deleteSportById(Integer.parseInt(deleteId));
+            int affectedRows = sportFacade.deleteSportById(Integer.parseInt(deleteId));
             if (affectedRows > 0)
             {
                 // deletion successful
                 
                 // imports new sportList into applicationScope from database.
-                request.getServletContext().setAttribute("sportList", bmiFacade.getAllSports());
+                request.getServletContext().setAttribute("sportList", sportFacade.getAllSports());
                 
                  // removes from existing List in applicationScope
                 /*
@@ -56,7 +56,7 @@ public class ManageSportsCommand extends CommandProtectedPage
         }
         else if (editId != null)
         {
-            Sport sport = bmiFacade.getSportById(Integer.parseInt(editId));
+            Sport sport = sportFacade.getSportById(Integer.parseInt(editId));
             request.setAttribute("sport", sport);
             return "editsportpage";
         }
@@ -65,13 +65,13 @@ public class ManageSportsCommand extends CommandProtectedPage
             String name = request.getParameter("name");
             int id = Integer.parseInt(request.getParameter("id"));
             
-            int affectedRows = bmiFacade.updateSport(new Sport(id, name));
+            int affectedRows = sportFacade.updateSport(new Sport(id, name));
             if (affectedRows > 0)
             {
                 // update successful
         
                 // imports new sportList into applicationScope from database.
-                request.getServletContext().setAttribute("sportList", bmiFacade.getAllSports());
+                request.getServletContext().setAttribute("sportList", sportFacade.getAllSports());
             }
             else
             {
