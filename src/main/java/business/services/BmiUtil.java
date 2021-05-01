@@ -4,7 +4,8 @@ public class BmiUtil
 {
     public static double calcBMI(double weight, double height)
     {
-        // assert height converted to meters.
+        // convert to meters.
+        height = height/100;
         return weight/(height*height);    // formula for BMI
     }
     

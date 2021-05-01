@@ -29,8 +29,8 @@ public class CalcBMICommand extends CommandUnprotectedPage
             HttpServletResponse response) throws UserException
     {
         
-        double weight;
-        double height;
+        int weight;
+        int height;
         double bmi;
         String category;
         String gender = request.getParameter("gender");
@@ -48,16 +48,13 @@ public class CalcBMICommand extends CommandUnprotectedPage
         
         try
         {
-            // TODO: save as double but parse as int so you can do arithmetic but prevent users from inputting decimals
-            // TODO: put the meter conversion in the calculation formula instead to preserve height as whole number in cm
-            // TODO: set "step" in the HTML to 1 to prevent decimals. ACTUALLY, default is 1, so it works right now.
-            weight = Double.parseDouble(request.getParameter("weight"));
-            height = Double.parseDouble(request.getParameter("height")) / 100; // convert to meter
+            weight = Integer.parseInt(request.getParameter("weight"));
+            height = Integer.parseInt(request.getParameter("height")); // convert to meter
         }
         catch (NumberFormatException e)
         {
             // also solved using HTML built-in validation, type="number"
-            request.setAttribute("error","Input must be a number.");
+            request.setAttribute("error","Input must be a whole number.");
             return "index";
 //            throw new UserException("Input must be a number.");
         }
@@ -80,17 +77,8 @@ public class CalcBMICommand extends CommandUnprotectedPage
             }
         }
         
-        // TODO: you can consolidate this to just saving the bmiEntry instead of every variable separately.
-        request.setAttribute("weight",weight);
-        request.setAttribute("height",height);
-        request.setAttribute("bmi",String.format(Locale.ENGLISH,"%.2f",bmi));  // rounds to 2 decimals.
-        request.setAttribute("category",category);
-        request.setAttribute("gender",gender);
-        request.setAttribute("sport",sport);
-        request.setAttribute("hobbies",hobbyList);
-    
         BmiEntry bmiEntry = new BmiEntry(weight, height, bmi, category, gender, sport, hobbyList, user);
-        
+        request.setAttribute("bmiEntry", bmiEntry);
         bmiFacade.insertBmiEntry(bmiEntry);
         
         return pageToShow;

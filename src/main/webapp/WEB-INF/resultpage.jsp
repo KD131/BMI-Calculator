@@ -24,33 +24,33 @@
                 <table class="table table-striped">
                     <tr>
                         <td>Weight</td>
-                        <td>${requestScope.weight} kg</td>
+                        <td>${requestScope.bmiEntry.weight} kg</td>
                     </tr>
                     <tr>
                         <td>Height</td>
-                        <td>${requestScope.height} m</td>
+                        <td>${requestScope.bmiEntry.height} m</td>
                     </tr>
                     <tr>
                         <td>BMI</td>
-                        <td>${requestScope.bmi}</td>
+                        <td>${requestScope.bmiEntry.bmiString}</td>
                     </tr>
                     <tr>
                         <td>Category</td>
-                        <td>${requestScope.category}</td>
+                        <td>${requestScope.bmiEntry.category}</td>
                     </tr>
                     <tr>
                         <td>Gender</td>
-                        <td>${requestScope.gender}</td>
+                        <td>${requestScope.bmiEntry.gender}</td>
                     </tr>
                     <tr>
-                        <td>Primary sport (id)</td>
-                        <td>${requestScope.sport.name}</td>
+                        <td>Primary sport</td>
+                        <td>${requestScope.bmiEntry.sport.name}</td>
                     </tr>
-                    <c:if test="${not empty requestScope.hobbies}">
+                    <c:if test="${not empty requestScope.bmiEntry.hobbyList}">
                         <tr>
                             <td class="align-middle">Hobbies (id)</td>
                             <td>
-                                <c:forEach var="hobby" items="${requestScope.hobbies}">
+                                <c:forEach var="hobby" items="${requestScope.bmiEntry.hobbyList}">
                                     ${hobby}<br/>
                                 </c:forEach>
                             </td>

@@ -26,8 +26,8 @@ public class BmiMapper
     
             try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS))
             {
-                ps.setDouble(1, bmiEntry.getWeight());
-                ps.setDouble(2, bmiEntry.getHeight());
+                ps.setInt(1, bmiEntry.getWeight());
+                ps.setInt(2, bmiEntry.getHeight());
                 ps.setDouble(3, bmiEntry.getBmi());
                 ps.setString(4, bmiEntry.getCategory());
                 ps.setString(5, bmiEntry.getGender());
@@ -120,10 +120,9 @@ public class BmiMapper
                 
                 while (rs.next())
                 {
-                    // TODO: if refactoring the data types from double to int, change here as well
                     int id = rs.getInt("id");
-                    double weight = rs.getDouble("weight");
-                    double height = rs.getDouble("height");
+                    int weight = rs.getInt("weight");
+                    int height = rs.getInt("height");
                     double bmi = rs.getDouble("bmi");
                     String category = rs.getString("category");
                     String gender = rs.getString("gender");
@@ -189,8 +188,8 @@ public class BmiMapper
                 while (rs.next())
                 {
                     int id = rs.getInt("id");
-                    double weight = rs.getDouble("weight");
-                    double height = rs.getDouble("height");
+                    int weight = rs.getInt("weight");
+                    int height = rs.getInt("height");
                     double bmi = rs.getDouble("bmi");
                     String category = rs.getString("category");
                     String gender = rs.getString("gender");
@@ -221,5 +220,4 @@ public class BmiMapper
             throw new UserException(ex.getMessage());
         }
     }
-
 }

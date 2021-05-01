@@ -39,7 +39,7 @@
                     <td>${bmiEntry.entryId}</td>
                     <td>${bmiEntry.weight}</td>
                     <td>${bmiEntry.height}</td>
-                    <td>${bmiEntry.bmi}</td>
+                    <td>${bmiEntry.bmiString}</td>
                     <td>${bmiEntry.category}</td>
                     <td>${bmiEntry.gender}</td>
                     <td>${bmiEntry.sport.name}</td>

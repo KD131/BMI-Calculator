@@ -2,13 +2,15 @@ package business.entities;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Locale;
 
 public class BmiEntry
 {
     private int entryId;
-    private double weight;
-    private double height;
+    private int weight;
+    private int height;
     private double bmi;
+    private String bmiString;
     private String category;
     private String gender;
     private Sport sport;
@@ -19,7 +21,7 @@ public class BmiEntry
     // TODO: decide if hobbyList and user should be in the constructor. There's a good case to be made that they shouldn't.
     //  But they could always be null when instantiated.
     //  But you could just as easily, perhaps more cleanly, just set it after the instantiation.
-    public BmiEntry(double weight, double height, double bmi, String category, String gender, Sport sport, List<Integer> hobbyList, User user)
+    public BmiEntry(int weight, int height, double bmi, String category, String gender, Sport sport, List<Integer> hobbyList, User user)
     {
         this.weight = weight;
         this.height = height;
@@ -29,6 +31,8 @@ public class BmiEntry
         this.sport = sport;
         this.hobbyList = hobbyList;
         this.user = user;
+        
+        this.bmiString = String.format(Locale.ENGLISH,"%.2f",bmi);
     }
     
     public int getEntryId()
@@ -41,12 +45,12 @@ public class BmiEntry
         this.entryId = entryId;
     }
     
-    public double getWeight()
+    public int getWeight()
     {
         return weight;
     }
     
-    public double getHeight()
+    public int getHeight()
     {
         return height;
     }
@@ -54,6 +58,11 @@ public class BmiEntry
     public double getBmi()
     {
         return bmi;
+    }
+    
+    public String getBmiString()
+    {
+        return bmiString;
     }
     
     public String getCategory()
